@@ -23,9 +23,13 @@ from functools import reduce
 
 class Solution:
     def missingTwo(self, nums: List[int]) -> List[int]:
+        r = nums[0]
         N = len(nums) + 2
-        exp = list(range(1, N+1)) + nums
-        r = reduce( lambda x, y: x ^ y ,exp )
+        for num in nums :
+            r = r ^ num
+
+        for i in range(1, N+1):
+            r = r ^ i
         r = (r & -r)
         num1 = num2 = 0
         for num in exp:
