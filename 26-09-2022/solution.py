@@ -32,7 +32,7 @@ class Solution:
             r = r ^ i
         r = (r & -r)
         num1 = num2 = 0
-        for num in exp:
+        for num in nums:
             if num & r:
                 num1 ^= num
             else:
