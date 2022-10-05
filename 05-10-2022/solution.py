@@ -16,17 +16,23 @@
 class Solution(object):
     def mergesort(self, nums, left, right, snums):
         if left == right:
-            return 
+            '''
+            为了防止列表为空这里递归基的条件可以改成：
+            left >= right
+            '''
+            return 0
 
         mid = (left + right) // 2
-        self.mergesort(nums, left, mid, snums)
-        self.mergesort(nums, mid+1, right, snums)
-        self.merge(nums, left, mid, right, snums)
-        return
+        lcnt = self.mergesort(nums, left, mid, snums)
+        rcnt = self.mergesort(nums, mid+1, right, snums)
+        if nums[mid] <= nums[mid+1]:                # 稍微加速归并排序
+            return lcnt + rcnt
+        ccnt = self.merge(nums, left, mid, right, snums)
+        return lcnt + rcnt + ccnt
 
     def merge(self, nums, left, mid, right, snums):
         i, j, pos = left, mid+1, left               # 分别指向左区间，右区间，有序列表
-
+        cnt = 0
         while i <= mid and j <= right:
             if nums[i] <= nums[j]:
                 snums[pos] = nums[i]
@@ -34,6 +40,7 @@ class Solution(object):
             else:
                 snums[pos] = nums[j]
                 j += 1
+                cnt += (mid-i+1)
             pos += 1
                                                     # 拷贝剩余元素
         while i <= mid:
@@ -48,7 +55,7 @@ class Solution(object):
 
         nums[left:right+1] = snums[left:right+1]    # 赋值回原数组
 
-        return
+        return cnt
 
 
     def reversePairs(self, nums):
@@ -56,13 +63,21 @@ class Solution(object):
         n = len(nums)
         snums = [0] * n
 
-        self.mergesort(nums, 0, n-1, snums)         # 区间 左闭右闭
+        '''
+        判断列表是否为空
+        小于两个元素直接返回 0 即可
+        '''
 
-        return nums
+        if n <= 1:                                        
+            return 0
+
+        cnt = self.mergesort(nums, 0, n-1, snums)         # 区间 左闭右闭
+
+        return cnt
 
          
 
-nums = [7, 5, 6, 4]
+nums = []
 sol = Solution()
 print(sol.reversePairs(nums))
 
