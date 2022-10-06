@@ -17,7 +17,7 @@ arr[j], arr[j + 1], ..., arr[arr.length - 1] 为第三部分。
 '''
 
 
-from itertools import accumulate
+
 
 class Solution(object):
     def threeEqualParts(self, arr):
@@ -28,6 +28,7 @@ class Solution(object):
             return [-1, -1]
         
         partial = n / 3
+        # from itertools import accumulate
         # acc = list(accumulate(arr))
         # first, second, third = acc.index(1), acc.index(partial+1), acc.index(partial*2+1)
         first, second, third, cur = 0, 0, 0, 0
@@ -40,7 +41,6 @@ class Solution(object):
                 elif cur == 2 * partial:
                     third = i
                 cur += 1
-
 
         length = len(arr) - third           # 二进制数长度
         if first + length <= second and second + length <= third:
