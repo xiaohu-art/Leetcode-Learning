@@ -1,0 +1,28 @@
+### 只要确定了起始的 1 的位置，就可以通确定该数字的表示长度
+
+### 有了表示长度，就可以比较前两个 1 的位置坐标是否越界
+
+### 没有越界，则具体比较各个长度上列表的切片是否完全一致
+
+### 即我学习到的是： 如何优雅的统计出 1 的位置
+
+#### method 1
+```python
+arr = [0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0]
+acc = list(accumulate(arr))
+first, second, third = acc.index(1), acc.index(partial+1), acc.index(partial*2+1)
+```
+
+#### method 2
+```python
+first, second, third, cur = 0, 0, 0, 0
+for i, x in enumerate(arr):
+    if x:
+        if cur == 0:
+            first = i
+        elif cur == partial:
+            second = i
+        elif cur == 2 * partial:
+            third = i
+        cur += 1
+```
