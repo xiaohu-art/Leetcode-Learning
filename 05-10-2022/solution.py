@@ -31,7 +31,7 @@ class Solution(object):
         return lcnt + rcnt + ccnt
 
     def merge(self, nums, left, mid, right, snums):
-        i, j, pos = left, mid, left               # 分别指向左区间，右区间，有序列表
+        i, j, pos = left, mid, left                 # 分别指向左区间，右区间，有序列表
         cnt = 0
         while i < mid and j < right:
             if nums[i] <= nums[j]:
