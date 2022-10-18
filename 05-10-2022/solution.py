@@ -22,6 +22,8 @@ class Solution(object):
             '''
             return 0
 
+
+
         mid = (left + right) // 2
         lcnt = self.mergesort(nums, left, mid, snums)
         rcnt = self.mergesort(nums, mid, right, snums)
